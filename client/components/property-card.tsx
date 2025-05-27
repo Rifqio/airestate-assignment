@@ -37,7 +37,7 @@ export function PropertyCard({ property, onPropertyDeleted }: PropertyCardProps)
         
         setIsDeleting(true);
         try {
-            const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://103.175.220.122:6500";
             const response = await fetch(
                 `${BASE_URL}${ENDPOINTS.PROPERTIES.DELETE(property.id)}`,
                 {

@@ -24,7 +24,7 @@ interface AuthState {
     setLoading: (isLoading: boolean) => void
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://103.175.220.122:6500'
 
 export const useAuthStore = create<AuthState>()(
     persist(

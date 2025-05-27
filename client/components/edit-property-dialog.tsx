@@ -101,7 +101,7 @@ export function EditPropertyDialog({
       setLoadError(null);
       
       try {
-        const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+        const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://103.175.220.122:6500";
         const response = await fetch(
           `${BASE_URL}${ENDPOINTS.PROPERTIES.DETAIL(propertyId)}`,
           {
@@ -173,7 +173,7 @@ export function EditPropertyDialog({
         formData.append("image", values.image[0]);
       }
 
-      const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://103.175.220.122:6500";
       const response = await fetch(`${BASE_URL}${ENDPOINTS.PROPERTIES.UPDATE(propertyId)}`, {
         method: "PUT",
         headers: {

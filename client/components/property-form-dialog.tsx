@@ -107,7 +107,7 @@ export function PropertyFormDialog({ onPropertyAdded }: { onPropertyAdded: () =>
       formData.append("address", values.address);
       formData.append("image", values.image[0]);
 
-      const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://103.175.220.122:6500";
       const response = await fetch(`${BASE_URL}${ENDPOINTS.PROPERTIES.CREATE}`, {
         method: "POST",
         headers: {

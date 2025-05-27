@@ -14,7 +14,7 @@ class UserRepository {
             data: {
                 email,
                 password,
-                name: email.split('@')[0], // Default name from email
+                name: email.split('@')[0],
             },
         });
     }

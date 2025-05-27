@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -26,12 +26,16 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export default function Login() {
+function LoginForm() {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const isRegistered = searchParams.get("registered") === "true";
+    const [isRegistered, setIsRegistered] = useState(false);
     const { login, loading } = useAuthStore();
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        const url = new URL(window.location.href);
+        setIsRegistered(url.searchParams.get("registered") === "true");
+    }, []);
 
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
@@ -233,5 +237,14 @@ export default function Login() {
                 </Button>
             </div>
         </div>
+    );
+}
+
+// Main page component with Suspense
+export default function Login() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <LoginForm />
+        </Suspense>
     );
 }

@@ -6,9 +6,16 @@ const routes = require("./routes/main");
 const responseHandler = require("./middlewares/response.middleware");
 const httpLogger = require("./middlewares/http-logger.middleware");
 const { Logger } = require("./utils/logger");
+const cors = require("cors");
 
 app.use(express.json());
-const port = process.env.PORT || 3000;
+app.use(
+    cors({
+        origin: "*",
+        credentials: true,
+    })
+);
+const port = process.env.PORT || 5000;
 
 app.use(responseHandler);
 app.use(httpLogger);

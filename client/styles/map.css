@@ -1,0 +1,118 @@
+.property-marker {
+  cursor: pointer;
+}
+
+.price-badge {
+  background-color: #000000;
+  color: white;
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  transform-origin: bottom center;
+  z-index: 1;
+}
+
+.price-badge:hover,
+.price-badge.active {
+  transform: scale(1.05);
+  z-index: 20;
+}
+
+.property-popup {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s;
+  background: white;
+  width: 240px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.price-badge:hover .property-popup,
+.price-badge.active .property-popup {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.property-image {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.property-info {
+  padding: 0.75rem;
+}
+
+.property-info h3 {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.property-info p {
+  color: #666;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Pointer element at the bottom of popup */
+.property-popup::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+}
+
+/* Mapbox attribution styling fix */
+.mapboxgl-ctrl-attrib-inner a {
+  color: #404040;
+}
+
+/* Location picker styles */
+.mapboxgl-marker {
+  cursor: grab;
+}
+
+.mapboxgl-marker:active {
+  cursor: grabbing;
+}
+
+/* Make the map controls slightly smaller */
+.mapboxgl-ctrl-group {
+  font-size: 14px;
+}
+
+.mapboxgl-ctrl button {
+  width: 28px;
+  height: 28px;
+}

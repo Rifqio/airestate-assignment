@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18-slim
 
 # Create app directory
 WORKDIR /app
@@ -7,9 +7,15 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Install dependencies
+RUN apt-get update && \
+    apt-get install -y openssl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN npm ci
 
-RUN npx prisma generate 
+# Generate Prisma client
+RUN npx prisma generate
 
 # Copy app source
 COPY . .

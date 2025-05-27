@@ -33,6 +33,7 @@ import { toast } from "./ui/use-toast";
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
+// Modified schema to avoid using FileList directly
 const propertyFormSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
@@ -46,12 +47,14 @@ const propertyFormSchema = z.object({
     message: "Longitude must be between -180 and 180",
   }),
   address: z.string().min(5, "Address must be at least 5 characters"),
-  image: z
-    .instanceof(FileList)
+  image: z.any()
     .optional()
-    .refine((files) => !files || files.length === 0 || files[0]?.size <= MAX_FILE_SIZE, "Max file size is 5MB")
     .refine(
-      (files) => !files || files.length === 0 || ACCEPTED_IMAGE_TYPES.includes(files[0]?.type),
+      (files) => !files || files.length === 0 || files?.[0]?.size <= MAX_FILE_SIZE,
+      "Max file size is 5MB"
+    )
+    .refine(
+      (files) => !files || files.length === 0 || ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
       "Only .jpg, .jpeg, .png and .webp files are accepted"
     ),
 });
